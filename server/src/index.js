@@ -1,6 +1,12 @@
 const express = require("express")
 const { ApolloServer, gql } = require("apollo-server-express")
 
+const notes = [
+  { id: "1", content: "This is a note", author: "hyunjin" },
+  { id: "2", content: "This is a note", author: "hyunjin" },
+  { id: "3", content: "This is a note", author: "hyunjin" },
+]
+
 async function start() {
   const app = express()
   const port = process.env.PORT || 4000
@@ -9,12 +15,38 @@ async function start() {
   const typeDefs = gql`
     type Query {
       hello: String
+      notes: [Note!]!
+      note(id: ID!): Note
+    }
+
+    type Mutation {
+      newNote(content: String!): Note!
+    }
+
+    type Note {
+      id: ID
+      content: String
+      author: String
     }
   `
   // 스키마 필드를 위한 리졸버 함수 제공
   const resolvers = {
     Query: {
       hello: () => "Hello world!",
+      notes: () => notes,
+      note: (parent, args) => notes.find((note) => note.id === args.id),
+    },
+    Mutation: {
+      newNote: (parent, args) => {
+        let noteValue = {
+          id: String(notes.length + 1),
+          content: args.content,
+          author: "Adam Scott",
+        }
+
+        notes.push(noteValue)
+        return noteValue
+      },
     },
   }
 
@@ -23,6 +55,7 @@ async function start() {
   await server.start()
   // 아폴로 그래프QL 미들웨어를 적용하고 경로를 /api로 설정
   server.applyMiddleware({ app, path: "/api" })
+
   app.listen({ port }, () =>
     console.log(
       `🚀 GraphQL Server ready at http://localhost:${port}${server.graphqlPath}`
