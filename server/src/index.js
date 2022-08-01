@@ -1,5 +1,10 @@
+require("dotenv").config()
 const express = require("express")
 const { ApolloServer, gql } = require("apollo-server-express")
+
+const db = require("./db")
+
+const DB_HOST = process.env.DB_HOST
 
 const notes = [
   { id: "1", content: "This is a note", author: "hyunjin" },
@@ -10,6 +15,8 @@ const notes = [
 async function start() {
   const app = express()
   const port = process.env.PORT || 4000
+
+  db.connect(DB_HOST)
 
   // 그래프 QL 스키마 언어로 스키마를 구성
   const typeDefs = gql`
