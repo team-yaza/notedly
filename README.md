@@ -1,4 +1,4 @@
-# notedly
+# notedly 📝
 
 ## 개요
 
