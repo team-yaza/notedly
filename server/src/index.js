@@ -1,8 +1,10 @@
-require("dotenv").config()
-const express = require("express")
-const { ApolloServer, gql } = require("apollo-server-express")
+import dotenv from "dotenv"
+dotenv.config()
+import express from "express"
+import { ApolloServer, gql } from "apollo-server-express"
 
-const db = require("./db")
+import models from "./models/index.js"
+import db from "./db.js"
 
 const DB_HOST = process.env.DB_HOST
 
@@ -40,7 +42,7 @@ async function start() {
   const resolvers = {
     Query: {
       hello: () => "Hello world!",
-      notes: () => notes,
+      notes: async () => await models.Note.find(),
       note: (parent, args) => notes.find((note) => note.id === args.id),
     },
     Mutation: {

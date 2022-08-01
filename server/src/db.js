@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+import mongoose from "mongoose"
 
-module.exports = {
+export default {
   connect: (DB_HOST) => {
     // mongoose.set("useNuewUrlParser", true)
     mongoose.connect(DB_HOST)
@@ -12,6 +12,10 @@ module.exports = {
       )
 
       process.exit()
+    })
+
+    mongoose.connection.once("open", () => {
+      console.log("Connected to MongoDB")
     })
   },
   close: () => {
