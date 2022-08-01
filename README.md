@@ -2,7 +2,7 @@
 
 ## 개요
 
-JavaScript Everywhere에서 MOZI project에 쓰이는 기술 스택들을 많이 사용하고 있어서 읽으면서 개발 기록을 남기려고 한다.
+JavaScript Everywhere에서 MOZI에 쓰이는 기술 스택들을 많이 사용하고 있어서 읽으면서 개발 기록을 남기려고 한다.
 
 ## 요구 사항
 
