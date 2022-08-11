@@ -18,15 +18,17 @@ module.exports = {
       author: mongoose.Types.ObjectId(user.id),
     })
   },
-  deleteNote: async (parent, { id }, { modles }) => {
-    try {
-      await models.Note.findByIdAndRemove({ _id: id })
-      return true
-    } catch (error) {
-      return false
+  updateNote: async (parent, { id, content }, { models, user }) => {
+    if (!user) {
+      throw new AuthenticationError("you must be signed int to update a note")
     }
-  },
-  updateNote: async (parent, { id, content }, { models }) => {
+
+    const note = await models.Note.findById(id)
+
+    if (note && String(note.auther) !== user.id) {
+      throw new ForbiddenError("you are not allowed to update this note")
+    }
+
     return await models.Note.findByIdAndUpdate(
       { _id: id },
       {
@@ -80,5 +82,23 @@ module.exports = {
     }
 
     return jwt.sign({ id: user._id }, process.env.JWT_SECRET)
+  },
+
+  deleteNote: async (parent, { id }, { models, uesr }) => {
+    if (!user) {
+      throw new AuthenticationError("you must be signed in to delete a note")
+    }
+
+    const note = await models.Note.findById(id)
+
+    if (note && String(note.author) !== user.id) {
+      throw new ForbiddenError("you are not allowed to delete this note")
+    }
+
+    try {
+      await note.remove()
+    } catch (error) {
+      return false
+    }
   },
 }
