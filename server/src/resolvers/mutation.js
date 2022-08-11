@@ -15,4 +15,17 @@ module.exports = {
       return false
     }
   },
+  updateNote: async (parent, { id, content }, { models }) => {
+    return await models.Note.findByIdAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          content,
+        },
+      },
+      {
+        new: true,
+      }
+    )
+  },
 }
