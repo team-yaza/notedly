@@ -3,6 +3,8 @@ dotenv.config()
 const express = require("express")
 const { ApolloServer, gql } = require("apollo-server-express")
 const jwt = require("jsonwebtoken")
+const depthLimit = require("graphql-depth-limit")
+const { createComplexityLimitRule } = require("graphql-validation-complexity")
 
 const models = require("./models")
 const db = require("./db")
@@ -24,6 +26,7 @@ async function start() {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    validationRules: [depthLimit(5), createComplexityLimitRule(1000)], // 쿼리의 복잡도 제한
     context: ({ req }) => {
       const token = req.headers.authorization
       const user = getUser(token)
