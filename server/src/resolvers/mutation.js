@@ -101,4 +101,44 @@ module.exports = {
       return false
     }
   },
+  toggleFavorite: async (parent, { id }, { models, user }) => {
+    if (!user) {
+      throw new AuthenticationError("you must be signed in to favorite a note")
+    }
+
+    let noteCheck = await models.Note.findById(id)
+    const hasUser = noteCheck.favoritedBy.indexOf(user.id)
+
+    if (hasUser >= 0) {
+      return await models.Note.findByIdAndUpdate(
+        id,
+        {
+          $pull: {
+            favoritedBy: mongoose.Types.ObjectId(user.id),
+          },
+          $inc: {
+            favoriteCount: -1,
+          },
+        },
+        {
+          new: true,
+        }
+      )
+    } else {
+      return await models.Note.findByIdAndUpdate(
+        id,
+        {
+          $push: {
+            favoritedBy: mongoose.Types.ObjectId(user.id),
+          },
+          $inc: {
+            favoirteCount: 1,
+          },
+        },
+        {
+          new: true,
+        }
+      )
+    }
+  },
 }
