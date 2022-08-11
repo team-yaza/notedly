@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "dependencies": {
     "apollo-server-express": "^3.10.0",
     "dotenv": "^16.0.1",

@@ -1,7 +1,7 @@
-import Note from "./note.js"
+const Note = require("./note")
 
 const models = {
   Note,
 }
 
-export default models
+module.exports = models

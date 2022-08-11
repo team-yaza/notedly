@@ -1,6 +1,6 @@
-import mongoose from "mongoose"
+const mongoose = require("mongoose")
 
-export default {
+module.exports = {
   connect: (DB_HOST) => {
     // mongoose.set("useNuewUrlParser", true)
     mongoose.connect(DB_HOST)
