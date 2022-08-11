@@ -2,7 +2,7 @@ const models = require("../models")
 
 module.exports = {
   notes: async () => {
-    return await models.Note.find()
+    return await models.Note.find().limit(100)
   },
   note: async (parent, args) => {
     return await models.Note.findById(args.id)
