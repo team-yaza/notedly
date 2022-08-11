@@ -1,4 +1,9 @@
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+const { AuthenticationError, ForbiddenError } = require("apollo-server-express")
 const models = require("../models")
+require("dotenv").config()
+const gravatar = require("../utils/gravatar")
 
 module.exports = {
   newNote: async (parent, args, { models }) => {
@@ -27,5 +32,47 @@ module.exports = {
         new: true,
       }
     )
+  },
+  signUp: async (parent, { username, email, password }, { models }) => {
+    // 이메일 주소 스트링 처리
+    email = email.trim().toLowerCase()
+    // 비밀번호 해싱
+    const hashed = await bcrypt.hash(password, 10)
+    const avatar = gravatar(email)
+
+    try {
+      const user = await models.User.create({
+        username,
+        email,
+        avatar,
+        password: hashed,
+      })
+
+      return jwt.sign({ id: user._id }, process.env.JWT_SECRET)
+    } catch (error) {
+      console.log(error)
+      throw new Error("사용자 생성 실패")
+    }
+  },
+  signIn: async (parent, { username, email, password }, { models }) => {
+    if (email) {
+      email = email.trim().toLowerCase()
+    }
+
+    const user = await models.User.findOne({
+      $or: [{ email }, { username }],
+    })
+
+    if (!user) {
+      throw new AuthenticationError("Error signing in")
+    }
+
+    const valid = await bcrypt.compare(password, user.password)
+
+    if (!valid) {
+      throw new AuthenticationError("Error signing in")
+    }
+
+    return jwt.sign({ id: user._id }, process.env.JWT_SECRET)
   },
 }
