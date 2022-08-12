@@ -1,4 +1,24 @@
 {
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "dev": "node src/index.js",
+    "final": "nodemon final/index.js",
+    "seed": "node final/util/seed/index.js",
+    "lint": "eslint \"src/**/*.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "eslint": "^8.21.0",
+    "faker": "^6.6.6",
+    "node-fetch": "^3.2.10",
+    "nodemon": "^2.0.19"
+  },
   "dependencies": {
     "apollo-server-express": "^3.10.0",
     "bcrypt": "^5.0.1",
@@ -12,24 +32,5 @@
     "marked": "^4.0.18",
     "md5": "^2.3.0",
     "passport": "^0.6.0"
-  },
-  "name": "server",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon src/index.js",
-    "dev": "nodemon src/index.js",
-    "final": "nodemon final/index.js",
-    "seed": "node final/util/seed/index.js",
-    "lint": "eslint \"src/**/*.js\""
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "faker": "^6.6.6",
-    "node-fetch": "^3.2.10",
-    "nodemon": "^2.0.19"
   }
 }
