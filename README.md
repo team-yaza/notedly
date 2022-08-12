@@ -21,4 +21,10 @@ $ git commit -m "application ready for production"
 $ git push heroku master
 // 만약 server가 최상위 디렉터리가 아니라면,
 $ git subtree push --prefix server heroku master
+// 테스트
+$ curl \
+  -X POST \
+  -H "Content-Type: application/json" \
+  --data '{"query": "{notes {id}}"}' \
+  https://<YOUR_HEROKU_APP_NAME>.herokuapp.com/api
 ```
