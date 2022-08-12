@@ -8,8 +8,7 @@ import Sparkle from "../components/Sparkle"
 export default function Home() {
   return (
     <div>
-      <Header />
-      <Navigation />
+      <p>hhi</p>
     </div>
   )
 }
