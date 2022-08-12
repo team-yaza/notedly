@@ -18,8 +18,8 @@ JavaScript Everywhere에서 MOZI에 쓰이는 기술 스택들을 많이 사용�
 $ heroku git:remote -a <YOUR_HEROKU_APP_NAME>
 $ git add .
 $ git commit -m "application ready for production"
-$ git push heroku master
-$ git subtree push --prefix server heroku master //만약 server가 최상위 디렉터리가 아니라면
+$ git push heroku main
+$ git subtree push --prefix server heroku main //만약 server가 최상위 디렉터리가 아니라면
 $ curl \
   -X POST \
   -H "Content-Type: application/json" \
