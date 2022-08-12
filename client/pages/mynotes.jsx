@@ -5,12 +5,7 @@ const MyNotes = () => {
     document.title = "My Notes - Notedly"
   }, [])
 
-  return (
-    <div>
-      <h1>Notedly</h1>
-      <p>These are my notes</p>
-    </div>
-  )
+  return <div></div>
 }
 
 export default MyNotes
