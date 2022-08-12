@@ -24,4 +24,4 @@ const Navigation = () => {
   )
 }
 
-export default Link
+export default Navigation
