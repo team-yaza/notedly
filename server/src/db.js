@@ -15,7 +15,7 @@ module.exports = {
     })
 
     mongoose.connection.once("open", () => {
-      console.log("Connected to MongoDB")
+      console.log("🚀 Connected to MongoDB")
     })
   },
   close: () => {
