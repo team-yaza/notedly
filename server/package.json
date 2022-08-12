@@ -31,6 +31,7 @@
     "jsonwebtoken": "^8.5.1",
     "marked": "^4.0.18",
     "md5": "^2.3.0",
+    "mongoose": "^6.5.2",
     "passport": "^0.6.0"
   }
 }
