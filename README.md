@@ -14,6 +14,8 @@ JavaScript Everywhere에서 MOZI에 쓰이는 기술 스택들을 많이 사용�
 
 ## 서버 배포 (Heroku)
 
+`https://notedlyhyunjin.herokuapp.com/`
+
 ```sh
 $ heroku git:remote -a <YOUR_HEROKU_APP_NAME>
 $ git add .
