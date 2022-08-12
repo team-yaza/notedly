@@ -1,16 +1,37 @@
-import Head from "next/head"
-import Image from "next/image"
-import Link from "next/link"
+import { useQuery, gql } from "@apollo/client"
 import Button from "../components/Button"
-import Header from "../components/Header"
-import Navigation from "../components/Navigation"
-import Sparkle from "../components/Sparkle"
+
+const GET_NOTES = gql`
+  query NoteFeed($cursor: String) {
+    noteFeed(cursor: $cursor) {
+      cursor
+      hasNextPage
+      notes {
+        id
+        createdAt
+        content
+        favoriteCount
+        author {
+          username
+          id
+          avatar
+        }
+      }
+    }
+  }
+`
 
 export default function Home() {
+  const { data, loading, error, fetchMore } = useQuery(GET_NOTES)
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error :(</p>
+
   return (
     <div>
-      <p>hhi</p>
-      <Button />
+      {data.noteFeed.notes.map((note) => (
+        <div key={note.id}>{note.author.username}</div>
+      ))}
     </div>
   )
 }
