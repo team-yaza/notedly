@@ -19,7 +19,10 @@ async function start() {
   const app = express()
   const port = process.env.PORT || 4000
 
-  app.use(helmet())
+  if (process.env.NODE_ENV === "production") {
+    app.use(helmet())
+  }
+
   app.use(cors())
 
   db.connect(DB_HOST)
