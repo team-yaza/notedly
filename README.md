@@ -11,3 +11,12 @@ JavaScript Everywhere에서 MOZI에 쓰이는 기술 스택들을 많이 사용�
 - 사용자는 계정을 만들고, 로그인하고, 로그아웃 할 수 있다.
 - 사용자는 자신의 프로필 정보와 다른 사용자의 공개 프로필 정보를 검색할 수 있다.
 - 사용자는 다른 사용자의 메모를 즐겨찾기할 수 있고, 다른 사용자의 즐겨찾기 목록을 검색할 수 있다.
+
+## 서버 배포 (Heroku)
+
+```sh
+$ heroku git:remote -a <YOUR_HEROKU_APP_NAME>
+$ git add .
+$ git commit -m "application ready for production"
+$ git push heroku master
+```
