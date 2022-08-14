@@ -43,7 +43,6 @@ async function start() {
     },
   })
 
-  await server.start()
   // 아폴로 그래프QL 미들웨어를 적용하고 경로를 /api로 설정
   server.applyMiddleware({ app, path: "/api" })
 

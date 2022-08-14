@@ -42,6 +42,7 @@ module.exports = {
     )
   },
   signUp: async (parent, { username, email, password }, { models }) => {
+    console.log(user, email, password)
     // 이메일 주소 스트링 처리
     email = email.trim().toLowerCase()
     // 비밀번호 해싱
