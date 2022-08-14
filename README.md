@@ -1,3 +1,5 @@
+<img src="cover.png" width="200" align="right" />
+
 # notedly 📝
 
 ## 개요
